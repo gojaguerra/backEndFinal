@@ -22,7 +22,7 @@ if (config.ENVIRONMENT === 'PRODUCTION') {
                 level: 'info'
             }),
             new winston.transports.File({
-                filename: 'logs/errors.log',
+                filename: 'src/logs/errors.log',
                 level: 'error'
             })
         ]
