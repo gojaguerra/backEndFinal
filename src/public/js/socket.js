@@ -1,6 +1,5 @@
 // Conecto el socket para comunicarnos con el server
 const socket = io();
-
 const container = document.getElementById('container');
 
 //Socket
@@ -45,7 +44,8 @@ function procesDelId(comp){
                                 title: 'Producto Eliminado',
                                 icon: 'success'
                             })
-                            window.location= "/realTimeProducts";
+                            delayNavigateOk();
+                            /* window.location= "/realTimeProducts"; */
                         }else{
                             if (result.status === 403) {
                                 Swal.fire({
@@ -73,7 +73,6 @@ function procesDelId(comp){
 const goHome = document.getElementById('goHome')
 if(goHome) {
     goHome.addEventListener('click', (event) => {
-        /* window.location= "/home"; */
         window.location= "/";
     });
 };
