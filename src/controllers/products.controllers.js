@@ -31,9 +31,7 @@ const getProducts = async (req, res) => {
         }
         const products = await getProductsService(limit, page, query1, sort1);
         products.prevLink = products.hasPrevPage?`${config.url_base}/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:'';
-        /* products.prevLink = products.hasPrevPage?`http://localhost:8080/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:''; */
         products.nextLink = products.hasNextPage?`${config.url_base}/api/products?page=${products.nextPage}&query=${query2}&sort=${sort2}`:'';
-        /* products.nextLink = products.hasNextPage?`http://localhost:8080/api/products?page=${products.nextPage}&query=${query2}&sort=${sort2}`:''; */
         products.isValid= !(page<=0||page>products.totalPages)
         //Postman
         // res.send({ status: "success", payload: products}); 

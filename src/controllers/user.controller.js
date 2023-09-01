@@ -151,8 +151,6 @@ const passLink = async (req, res) => {
         }
 
         const accessToken = generateTokenResetPass(user);
-
-        /* const link = `http://localhost:8080/api/sessions/linkPassword?token=${accessToken}` */
         const link = `${config.url_base}/api/sessions/linkPassword?token=${accessToken}`
         const mail = {
             to: user.email,
@@ -274,7 +272,7 @@ const uploadFile = async (req, res) => {
                 };
                 const document = {
                     name: name,
-                    reference: `http://localhost:8080/files/${name}/${filename}`
+                    reference: `${config.url_base}/files/${name}/${filename}`
                 };
                 newDocument.push(document);
             });
@@ -289,7 +287,7 @@ const uploadFile = async (req, res) => {
                 };
                 const document = {
                     name: name,
-                    reference: `http://localhost:8080/files/${name}/${filename}`
+                    reference: `${config.url_base}/files/${name}/${filename}`
                 };
                 newDocument.push(document);
             });
