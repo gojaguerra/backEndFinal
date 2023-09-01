@@ -8,6 +8,7 @@ import {
 import { getUser as getUserService} from "../services/user.services.js";
 import { sendEmail } from "../services/mail.js";
 import { deleteNotification } from '../utils/custom-html-delete.js';
+import config from "../config/config.js";
 
 const getProducts = async (req, res) => {
     //leo el parametro por req.query
@@ -29,9 +30,10 @@ const getProducts = async (req, res) => {
             sort1= {price: sort};
         }
         const products = await getProductsService(limit, page, query1, sort1);
-        /* products.prevLink = products.hasPrevPage?`${url_base}/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:''; */
-        products.prevLink = products.hasPrevPage?`http://localhost:8080/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:'';
-        products.nextLink = products.hasNextPage?`http://localhost:8080/api/products?page=${products.nextPage}&query=${query2}&sort=${sort2}`:'';
+        products.prevLink = products.hasPrevPage?`${config.url_base}/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:'';
+        /* products.prevLink = products.hasPrevPage?`http://localhost:8080/api/products?page=${products.prevPage}&query=${query2}&sort=${sort2}`:''; */
+        products.nextLink = products.hasNextPage?`${config.url_base}/api/products?page=${products.nextPage}&query=${query2}&sort=${sort2}`:'';
+        /* products.nextLink = products.hasNextPage?`http://localhost:8080/api/products?page=${products.nextPage}&query=${query2}&sort=${sort2}`:''; */
         products.isValid= !(page<=0||page>products.totalPages)
         //Postman
         // res.send({ status: "success", payload: products}); 
@@ -147,7 +149,7 @@ const deleteProductById = async(req,res)=>{
         };
 
         const result = await deleteProductByIdService(id);
-        
+
         // si el producto es de user premium debo notificarle por email que se elimino el producto
         if (productById[0].owner){
             const user = await getUserService({ email: productById[0].owner });

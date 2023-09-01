@@ -8,6 +8,7 @@ import { deleteNotification } from '../utils/custom-html-delete.js';
 import { sendEmail } from '../services/mail.js';
 import { responseMessages } from '../helpers/proyect.helpers.js';
 import moment from "moment";
+import config from '../config/config.js';
 
 const registerUser = async (req, res) => {
     try {
@@ -151,7 +152,8 @@ const passLink = async (req, res) => {
 
         const accessToken = generateTokenResetPass(user);
 
-        const link = `http://localhost:8080/api/sessions/linkPassword?token=${accessToken}`
+        /* const link = `http://localhost:8080/api/sessions/linkPassword?token=${accessToken}` */
+        const link = `${config.url_base}/api/sessions/linkPassword?token=${accessToken}`
         const mail = {
             to: user.email,
             subject: 'Reseteo de Contraseña',
