@@ -1,0 +1,32 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+<h2>Vista de productos</h2> <br>
+
+{{#if users.isValid}}
+    <div>
+        <h3 class="h3Productos">Usuarios</h3>
+            <div id="producto-contenedor">
+                {{#each users}}
+                    <div class="card" style="width: 18rem;">
+                        {{!-- <img src="{{this.thumbnail}}" class="card-img-top" alt="..."> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">email:  {{this.email}}</p>
+                            <p class="card-text">role: {{this.role}}</p>
+                            <p class="card-text">conexion: {{this.last_connection}}</p>
+                            <button class="btn btn-primary" id="{{this._id}}" onclick="userChangeRoleId(this)">Role</button>
+                            <button class="btn btn-warning" id="{{this._id}}" onclick="userDeleteId(this)">Delete</button>
+                        </div>
+                    </div>
+                {{/each}}
+        </div>
+    </div>
+{{else}}
+    <h2 style="color: chocolate;">No se encontraron usuarios!</h2>
+{{/if}}
+
+<br/>
+<button id="goHome" class="btn btn-secondary"> Ir al HOME</button>
+<button id="goDeleteForTime" class="btn btn-warning"> Eliminar por Tiempo</button>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>

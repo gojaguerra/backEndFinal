@@ -1,0 +1,41 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+<h2>Carrito</h2>
+  
+{{#if isValid}}
+    <div class="table-responsive tabla">
+        <table class="table table-primary table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"> Código </th>
+                    <th scope="col"> Nombre </th>
+                    <th scope="col"> Descripción </th>
+                    <th scope="col"> Categoría </th>
+                    <th scope="col"> Precio </th>
+                    <th scope="col"> Cantidad </th>
+                    <th scope="col"> Imagen </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                    <tr>
+                        <th scope="row"> {{this.product.code}} </th>
+                        <th scope="row"> {{this.product.title}}</th>
+                        <th scope="row"> {{this.product.description}}</th>
+                        <th scope="row"> {{this.product.category}} </th>
+                        <th scope="row"> {{this.product.price}}</th>
+                        <th scope="row"> {{this.quantity}}</th>
+                        <th scope="row"> <img src="{{this.product.thumbnail}}" alt="products" width="200" height="100"></th>     
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>    
+    </div>
+{{else}}    
+    <h2 style="color: chocolate;">No se encontraron productos en su carrito </h2>
+{{/if}}
+<br/>
+<button id="viewProduct" class="btn btn-secondary"> Comprar Productos</button>
+<button id="goHome" class="btn btn-secondary"> Ir al Home</button>
+<button id="cerrarTicket" class="btn btn-primary"> Finalizar Pedido</button>
+
+<script src="/js/index.js"></script>

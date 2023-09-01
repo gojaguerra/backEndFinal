@@ -1,0 +1,59 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+<h2>Vista de productos</h2> <br>
+
+{{#if isValid}}
+    <div>
+        <div class="filter">
+            <p>Filtrar por Categoría:</p>
+            <select id="categSel1" name="categSel">
+                <option value="c1">Seleccione una categoría</option>
+                <option value="c2">Hogar</option>
+                <option value="c3">Cocina</option>
+                <option value="c4">Gym</option>
+                <option value="c5">Decoracion</option>
+                <option value="c6">Ver todos</option>
+            </select>
+            <p>Ordenar por Precio:</p>
+            <select id="ordPri" >
+                <option value="v1">Orden por precio</option>
+                <option value="v2">Por menor precio</option>
+                <option value="v3">Por mayor precio</option>
+            </select>
+        </div>
+        <h3 class="h3Productos">Productos disponibles</h3>
+            <div id="producto-contenedor">
+                {{#each docs}}
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">Descripción:  {{this.description}}</p>
+                            <p class="card-text">Precio:$ {{this.price}}</p>
+                            <button class="btn btn-primary" id="{{this._id}}" onclick="procesoId(this)">Comprar</button>
+                        </div>
+                    </div>
+                {{/each}}
+        </div>
+    </div>
+    <div>
+        {{#if hasPrevPage}}
+            <a class="btn btn-warning" href={{this.prevLink}}><< Anterior</a>  
+        {{/if}}
+        &nbsp;
+        {{this.page}}
+        &nbsp;
+        {{#if hasNextPage}}
+            <a class="btn btn-warning" href={{this.nextLink}}>Siguiente >></a>  
+        {{/if}} 
+    </div>
+{{else}}
+    <h2 style="color: chocolate;">No se encontraron productos</h2>
+{{/if}}
+
+<br/>
+<button id="addProduct" class="btn btn-secondary"> Ir a Cargar Productos</button>
+<button id="goHome" class="btn btn-secondary"> Ir al HOME</button>
+<button id="viewCart" class="btn btn-primary"> Ver carrito </button>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>

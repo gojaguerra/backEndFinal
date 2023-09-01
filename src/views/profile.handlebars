@@ -1,0 +1,16 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+
+<div>
+    <h2>Tu perfil (sin datos sensibles)</h2>
+    <p>Apellido y Nombre: {{user.last_name}} {{user.first_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Edad: {{user.age}}</p>
+    <p>Role: {{user.role}}</p>
+    <p>Ultima conexion: {{user.last_connection}}</p>
+    <br>
+    <button id="goHome" class="btn btn-primary"> Ir al HOME</button>
+    {{!-- <button id="logout" class="btn btn-primary"> Salir</button> --}}
+    <a href="/api/sessions/logout"><button class="btn btn-primary" >Salir</button></a>
+</div>
+
+<script src="/js/index.js"></script>

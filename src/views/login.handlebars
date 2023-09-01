@@ -1,0 +1,25 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+
+<div class="login">
+    <h1>Login</h1>
+    <form  id="loginForm">
+        <label for="username">
+            <i class="fas fa-user"></i>
+        </label>
+        <input type="text" name="email" placeholder="Email" id="username" required>
+        <label for="password">
+            <i class="fas fa-lock"></i>
+        </label>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <button id="login" type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p>¿No estás registrado? <a href="/register">Regístrate aquí</a></p>
+    <p>¿Olvisaste tu Contraseña? <a href="/resetPassword">Recuperar Contraseña</a></p>
+    <div class="divGithub">
+        <a href="/api/sessions/github"> <button class="btn btn-dark githubButton"><i class="fa-brands fa-github"></i> Ingresar con Github</button> </a>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/6ab0217e5f.js" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/login.js"></script>

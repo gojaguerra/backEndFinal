@@ -1,0 +1,271 @@
+paths:
+  /api/products: 
+    get:
+      summary: Obtener todos los productos en la BBDD
+      tags:
+        - Products
+      parameters: 
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/queryParam'   
+      responses:
+        "200":
+          description: Los productos fueron obtenidos satisfactoriamente de la BBDD
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o fallo en la conexión a la BBDD
+    post:
+      summary: Crea un producto nuevo
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/postProduct'
+      responses:
+        "200":
+          description: El producto fue creado correctamente
+        "400":
+          description: Hay campos que faltan completar!
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o fallo en la conexión a la BBDD
+        "501":
+          description: Ya existe el producto que quiere crear!
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un solo producto a partir de su MONGO ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El producto se obtuvo satisfcatoriamente de la BBDD
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Product'
+        "404":
+          description: El prodcuto con ID {pid} NO existe!
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o fallo en la conexión a la BBDD
+    put:
+      summary: Actualiza el producto a partir de su ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/putProduct'
+      responses:
+        "200":
+          description: El producto fue actualizado correctamente
+        "404":
+          description: Error no se pudo actualizar el producto
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o fallo en la conexión a la BBDD
+    delete:
+      summary: Elimina un producto
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/deleteProduct'                  
+      responses:
+        "200":
+          description: Se elimino el producto del correctamente
+        "403":
+          description: NO tiene permiso para eliminar este producto!          
+        "404":
+          description: El producto con ID {pid} NO existe!
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o fallo en la conexión a la BBDD
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - title
+        - description
+        - code
+        - stock
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongodb
+        title:
+          type: String
+          description: Nombre del producto
+          required: true
+        description:
+          type: String
+          description: Descripción del producto
+          required: true
+        price:
+          type: Number
+          description: Precio de venta del producto
+        code:
+          type: Number
+          description: Código del producto, el mismo es único y se encuentra indexado
+          required: true
+        stock:
+          type: Numbrer
+          description: Existencia del producto. Por defecto en 0
+          required: true
+        category:
+          type: String
+          description: Categoría del producto  
+        thumbnail:
+          type: Array
+          description: Imágenes del producto, las mismas se almacen en link
+        status:
+          type: Boolean
+          description: Estado del producto    
+        owner:
+          type: String
+          description: Usuario que creo el producto      
+      example:
+        _id: ObjectId("64660f16b7de90929cb6eb2a")
+        title: Lampara Colgante
+        description: Lampara de pared, madera de eucalipto, foco vintage
+        price: 4500
+        code: 1001
+        stock: 10
+        category: Decoracion
+        thumbnail: ["/img/carrito01.jpeg"]
+        status: true
+        owner: jguerra1968@gmail.com
+  requestBodies:
+    postProduct:
+      type: object
+      properties:
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripción del producto
+        code:
+          type: String
+          description: Código único del producto
+        price:
+          type: Number
+          description: Precio de venta del producto
+        stock:
+          type: Numbrer
+          description: Existencia del producto. Por defecto en 0
+        category:
+          type: String
+          description: Categoría del producto  
+        thumbnail:
+          type: Array
+          description: Imágenes del producto, las mismas se almacen en link
+      example:
+        title: Lampara Colgante
+        description: Lampara de pared, madera de eucalipto, foco vintage
+        price: 4500
+        code: 1001
+        stock: 10
+        category: Decoracion
+        thumbnail: ["/img/carrito01.jpeg"]
+    putProduct:
+      type: object
+      properties:
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio de venta del producto
+        stock:
+          type: Numbrer
+          description: Existencia del producto. Por defecto en 0
+        category:
+          type: String
+          description: Categoría del producto  
+        thumbnail:
+          type: Array
+          description: Imágenes del producto, las mismas se almacen en link
+      example:
+        title: Lampara Colgante
+        description: Lampara de pared, madera de eucalipto, foco vintage
+        price: 4500
+        stock: 10
+        category: Decoracion
+        thumbnail: ["/img/carrito01.jpeg"]  
+    deleteProduct:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email del usuario
+        role:
+          type: string
+          description: Role del usuario          
+      example:
+        req.user.email: jguerra1968@gmail.com
+        req.user.role: admin              
+  parameters:
+    sortParam:
+      name: sort
+      in: query
+      description: " Orden por precio"
+      example: "{price: sort}"
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: "número de resultados a obtener por página"
+      example: 10
+      schema:
+        type: integer    
+    pageParam:
+      name: page
+      in: query
+      description: "número de página actual"
+      example: 0
+      schema:
+        type: integer    
+    queryParam:
+      name: query
+      in: query
+      description: " Filtro por categoría"
+      example: "{category: query}"
+      schema:
+        type: string                
