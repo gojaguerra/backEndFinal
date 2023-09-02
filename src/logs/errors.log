@@ -45,3 +45,5 @@
 {"level":"error","message":"Error deleteProductById: NO existe el producto que desea eliminar!"}
 {"level":"error","message":"Error deleteProductById: NO existe el producto que desea eliminar!"}
 {"level":"error","message":"Error deleteProductById: NO existe el producto que desea eliminar!"}
+{"level":"error","message":"Error registerUser: Faltan completar campos!"}
+{"level":"error","message":"Error registerUser: User already exist!"}

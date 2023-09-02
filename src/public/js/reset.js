@@ -27,10 +27,9 @@ form.addEventListener('submit', e => {
     const obj = {};
     data.forEach((value, key) => obj[key] = value);
     Swal.fire({
-        position: 'top-end',
-        icon: 'success',
         title: 'Enviando correo...',
-        showConfirmButton: true,
+        timer: 3000,
+        timerProgressBar: true,
       })
     fetch('/api/sessions/password-link', {
         method: 'POST',

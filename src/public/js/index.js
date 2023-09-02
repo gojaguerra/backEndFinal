@@ -62,7 +62,7 @@ if(viewProduct) {
     });
 };
 
-// Botón para ir al chat
+// EVENTO para el Botón para ir al chat
 const viewChat = document.getElementById('viewChat')
 if(viewChat) {
     viewChat.addEventListener('click', (event) => {
@@ -70,7 +70,7 @@ if(viewChat) {
     });
 };
 
-// Botón para ver el carrito de prueba
+// EVENTO para el Botón para ver el carrito de prueba
 const viewCart = document.getElementById('viewCart')
 if(viewCart) {
     viewCart.addEventListener('click', async (event) => {
@@ -83,7 +83,7 @@ if(viewCart) {
     });
 };
 
-// Botón para acceder a ADMINISTRAR USUARIOS
+// EVENTO para el Botón para acceder a ADMINISTRAR USUARIOS
 const changeRole = document.getElementById('changeRole')
 if(changeRole) {
     changeRole.addEventListener('click', async (event) => {
@@ -107,7 +107,7 @@ if(changeRole) {
     });
 };
 
-// Botón para ELIMINAR USUARIOS
+// FUNCTION para el Botón para ELIMINAR USUARIOS
 function userDeleteId(comp){
     const id = comp.id;
     const butCart = document.getElementById(`${id}`)
@@ -128,6 +128,11 @@ function userDeleteId(comp){
             if (result.isConfirmed) {
                 const motivo= `{"motivo": "${result.value}"}`;
                 const url='/api/users/delete/'+id
+                Swal.fire({
+                    title: 'Enviando correo...',
+                    timer: 3000,
+                    timerProgressBar: true,
+                  })
                 fetch(url, {
                     method: 'DELETE',
                     body: motivo,
@@ -165,7 +170,7 @@ function userDeleteId(comp){
     };
 };
 
-// Botón para el cambio de ROL
+// FUNCTION para el Botón para el cambio de ROL
 function userChangeRoleId(comp){
     const id = comp.id;
     const butCart = document.getElementById(`${id}`)
@@ -224,7 +229,7 @@ function userChangeRoleId(comp){
     };
 };
 
-// Botón para Eliminar usuarios por inactividad
+// EVENTO para el Botón para Eliminar usuarios por inactividad
 const goDeleteForTime = document.getElementById('goDeleteForTime')
 if(goDeleteForTime) {
     goDeleteForTime.addEventListener('click', (event) => {
@@ -237,6 +242,11 @@ if(goDeleteForTime) {
             confirmButtonText: 'Eliminar'
         }).then(async result =>{
             if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Enviando correo...',
+                    timer: 3000,
+                    timerProgressBar: true,
+                  })
                 await fetch('/api/users/deleteall', {
                     method: 'DELETE',
                     headers: {
@@ -245,7 +255,6 @@ if(goDeleteForTime) {
                     }
                 })
                 .then((result) => {
-                    console.log(result);
                     if (result.status === 200) {
                         Swal.fire({
                             title: 'Se eliminaron los usuarios correctamente',
@@ -274,19 +283,6 @@ if(goDeleteForTime) {
             }        
         })        
     })
-};
-
-// Botón para ver finalizar pedido
-const closeCart = document.getElementById('cerrarTicket')
-if(closeCart) {
-    /* closeCart.addEventListener('click', async (event) => {
-        const prueba = await fetch('/api/sessions/current', {
-            method: 'GET'
-        });
-        const data = await prueba.json();
-        const cart =data.payload.cart;
-        window.location= "/api/carts/"+cart;
-    }); */
 };
 
 // Botón para insertar en carro
@@ -349,7 +345,7 @@ function procesoId(comp){
     };
 };
 
-// Botón para ver profile
+// EVENTO para el Botón para ver profile
 const viewProfile = document.getElementById('viewProfile')
 if(viewProfile) {
     viewProfile.addEventListener('click', (event) => {
@@ -357,10 +353,84 @@ if(viewProfile) {
     });
 };
 
-// Botón para logout
+// EVENTO para el Botón para logout
 const logout = document.getElementById('logout')
 if(logout) {
     logout.addEventListener('click', (event) => {
         window.location= "/api/sessions/logout";
     });
+};
+
+// EVENTO para el Botón para ver finalizar pedido
+const closeCart = document.getElementById('cerrarTicket')
+if(closeCart) {
+    /* closeCart.addEventListener('click', async (event) => {
+        const prueba = await fetch('/api/sessions/current', {
+            method: 'GET'
+        });
+        const data = await prueba.json();
+        const cart =data.payload.cart;
+        window.location= "/api/carts/"+cart+"/purchase";
+    }); */
+};
+
+// FUNCTION para el Botón para ELIMINAR PRODUCTOS DEL CARRITO
+function cartDeleteItem(comp){
+    const id = comp.id;
+    const butCart = document.getElementById(`${id}`)
+    console.log(comp);
+    if(butCart){ 
+        Swal.fire({
+            title: `Está seguro de eliminar el producto? `,
+            icon: 'warning',
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar!',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then(async result => {
+            if (result.isConfirmed) {
+
+                const pruebaCurrent = await fetch('/api/sessions/current', {
+                    method: 'GET'
+                });
+                const data = await pruebaCurrent.json();
+                const cartId=data.payload.cart;
+                console.log(cartId);
+
+                const url='/api/carts/'+cartId+'/product/'+id
+                fetch(url, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then((result) => {
+                    if (result.status === 200) {
+                        Swal.fire({
+                            title: 'Producto Eliminado',
+                            icon: 'success'
+                        })
+                        delayNavigateOkUsers();
+                    }else{
+                        if (result.status === 403) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'No cuenta con permisos para realizar dicha acción!',
+                                showConfirmButton: true,
+                            })
+                        }else {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Hubo un error al registrar la eliminición del producto, intente luego',
+                                showConfirmButton: true,
+                            })                
+                        }    
+                    }
+                });
+            };
+       }); 
+    };
 };
