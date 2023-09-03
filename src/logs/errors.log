@@ -47,3 +47,20 @@
 {"level":"error","message":"Error deleteProductById: NO existe el producto que desea eliminar!"}
 {"level":"error","message":"Error registerUser: Faltan completar campos!"}
 {"level":"error","message":"Error registerUser: User already exist!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"getCartById = El carrito con ID 64ade5160a5c4030e21aa512 NO existe!"}
+{"level":"error","message":"loginUser = Incorrect credentials"}
+{"level":"error","message":"getTicketById = El ticket con ID undefined NO existe!"}
+{"level":"error","message":"getTicketById = El ticket con ID undefined NO existe!"}
+{"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
+{"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
+{"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
+{"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
+{"level":"error","message":"postPurchase = config is not defined"}

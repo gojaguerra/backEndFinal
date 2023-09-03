@@ -1,0 +1,31 @@
+<h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
+<h2>Vista del Pedido {{this.code}}</h2> <br>
+<h4>Carrito Total: ${{this.amount}}</h4>
+<h4>Email: {{this.purchaser}}</h4>
+
+<div class="table-responsive tabla">
+        <table class="table table-primary table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"> Nombre </th>
+                    <th scope="col"> Precio </th>
+                    <th scope="col"> Cantidad </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                    <tr>
+                        <th scope="row"> {{this.title}}</th>
+                        <th scope="row"> {{price}}</th>
+                        <th scope="row"> {{quantity}}</th>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+
+<button id="goHome" class="btn btn-secondary"> Ir al HOME</button>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>

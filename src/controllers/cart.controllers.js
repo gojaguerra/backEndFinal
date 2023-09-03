@@ -41,6 +41,11 @@ const getCartById = async(req, res) => {
         const response ={ status: "Success", payload: cart};
         // VISTA DEL CARRITO
         cart[0].isValid= cart[0].products.length > 0
+        const sumaTotal = cart[0].products.reduce((acc, prev) => {
+            acc += prev.product.price * prev.quantity;
+            return acc;
+        }, 0);
+        cart[0].sumaTotal = sumaTotal;
         // res.status(200).json(response);
         res.render("carts.handlebars", cart[0] );
     } catch (error) {
@@ -203,18 +208,19 @@ const postPurchase = async(req, res) => {
         // OBTENGO el carrito QUE HAY EN la BASE y PERTENECE AL USER LOGUEADO
         const cartPuchase = await getCartByIdService(cartId);
         cartPuchase[0].products.forEach((product) => {
-        // VALIDO STOCK SUFICIENTE
-        if (product.product.stock > product.quantity) {
-            // ACTUALIZO STOCK
-            const resultStock = stockProductService(product.product._id, product.quantity*-1)
-            const prodData = {
-                    price: product.product.price,
-                    quantity: product.quantity
-            };
-            // ALMACENO EN NUEVO ARRAY
-            newCart.push(prodData);
-            // ELIMINO PRODUCTO DEL CARRO
-            const resultDelete = deleteProductInCartService(cartPuchase[0]._id,product.product._id);
+            // VALIDO STOCK SUFICIENTE
+            if (product.product.stock > product.quantity) {
+                // ACTUALIZO STOCK
+                const resultStock = stockProductService(product.product._id, product.quantity*-1)
+                const prodData = {
+                        title: product.product.title,
+                        price: product.product.price,
+                        quantity: product.quantity
+                };
+                // ALMACENO EN NUEVO ARRAY
+                newCart.push(prodData);
+                // ELIMINO PRODUCTO DEL CARRO
+                const resultDelete = deleteProductInCartService(cartPuchase[0]._id,product.product._id);
             } else {
                 const prodData = {
                     id: product._id
@@ -226,12 +232,15 @@ const postPurchase = async(req, res) => {
         // SI HAY PRODUCTOS VALIDADOS CON STOCK GENERO LA VENTA
         if (newCart.length > 0){
             const result = await postPurchaseService(newCart, userMail);
+            /* res.render("ticket.handlebars", newCart ); */
             if (noCart.length > 0) {
                 req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}  y no pudieron procesarse por falta de stock ${JSON.stringify(noStockCart, null)}`);
-                res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code} y no pudieron procesarse por falta de stock ${noCart}`  })
+                /* res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code} y no pudieron procesarse por falta de stock ${noCart}`  }) */
+                res.status(200).send({status:200, ticketId: `${result._id}`})
             } else {
                 req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}`);
-                res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code}`  })
+                /* res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code}` }) */
+                res.status(200).send({status:200, ticketId: `${result._id}`})
             };
         } else {
             if (noCart.length > 0) {

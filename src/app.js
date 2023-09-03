@@ -3,6 +3,7 @@ import { Server } from 'socket.io';
 import { __dirname } from "./utils/utils.js";
 import homeRouter from "./routes/home.router.js";
 import cartsRouter from "./routes/cart.router.js";
+import ticketsRouter from "./routes/ticket.router.js"
 import productRouter from "./routes/products.router.js";
 import viewsProdRouter from "./routes/viewsProd.router.js";
 import viewsChatPage from "./routes/viewsChatPage.route.js"
@@ -69,6 +70,7 @@ app.use('/api/users', usersRouter);
 app.use('/home', homeRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartsRouter);
+app.use('/api/tickets', ticketsRouter)
 app.use('/realtimeproducts', viewsProdRouter);
 app.use('/chat', viewsChatPage);
 // MONCKING

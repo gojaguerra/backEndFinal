@@ -1,5 +1,8 @@
 import { cartsRepository } from '../repositories/index.js';
 import { ticketsRepository } from '../repositories/index.js';
+import { sendEmail } from '../services/mail.js';
+import { ticketNotification } from '../utils/custom-html-ticket.js';
+import config from '../config/config.js';
 
 const postCart = async (cart) => {
     const result = await cartsRepository.addCart(cart);
@@ -48,10 +51,21 @@ const postPurchase = async (cart, userMail) => {
         code: code,
         purchase_datetime: new Date(),
         amount: sum,
-        purchaser: userMail
+        purchaser: userMail,
+        products: cart
     };
 
     const result = await ticketsRepository.createTicket(ticket);
+
+    const linkTicket = `${config.url_base}/api/tickets/${result._id}`
+    const linkFollow = `https://www.andreani.com/#!/personas`;
+    const mail = {
+        to: userMail,
+        subject: 'Nuevo pedido',
+        html: ticketNotification(result._id, sum, linkFollow, linkTicket)
+    }
+    await sendEmail(mail);
+
     return result;
 };
 

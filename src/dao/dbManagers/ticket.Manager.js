@@ -6,7 +6,7 @@ export default class TicketsDao {
     };
 
     getTicketsById = async (id) => {
-        const result = await ticketModel.findById(id);
+        const result = await ticketModel.findById(id).lean();
         return result;
     };
 

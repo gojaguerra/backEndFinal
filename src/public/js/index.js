@@ -70,7 +70,7 @@ if(viewChat) {
     });
 };
 
-// EVENTO para el Botón para ver el carrito de prueba
+// EVENTO para el Botón para ver el carrito del usuario
 const viewCart = document.getElementById('viewCart')
 if(viewCart) {
     viewCart.addEventListener('click', async (event) => {
@@ -359,78 +359,4 @@ if(logout) {
     logout.addEventListener('click', (event) => {
         window.location= "/api/sessions/logout";
     });
-};
-
-// EVENTO para el Botón para ver finalizar pedido
-const closeCart = document.getElementById('cerrarTicket')
-if(closeCart) {
-    /* closeCart.addEventListener('click', async (event) => {
-        const prueba = await fetch('/api/sessions/current', {
-            method: 'GET'
-        });
-        const data = await prueba.json();
-        const cart =data.payload.cart;
-        window.location= "/api/carts/"+cart+"/purchase";
-    }); */
-};
-
-// FUNCTION para el Botón para ELIMINAR PRODUCTOS DEL CARRITO
-function cartDeleteItem(comp){
-    const id = comp.id;
-    const butCart = document.getElementById(`${id}`)
-    console.log(comp);
-    if(butCart){ 
-        Swal.fire({
-            title: `Está seguro de eliminar el producto? `,
-            icon: 'warning',
-            input: 'text',
-            showCancelButton: true,
-            confirmButtonText: 'Eliminar!',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        }).then(async result => {
-            if (result.isConfirmed) {
-
-                const pruebaCurrent = await fetch('/api/sessions/current', {
-                    method: 'GET'
-                });
-                const data = await pruebaCurrent.json();
-                const cartId=data.payload.cart;
-                console.log(cartId);
-
-                const url='/api/carts/'+cartId+'/product/'+id
-                fetch(url, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then((result) => {
-                    if (result.status === 200) {
-                        Swal.fire({
-                            title: 'Producto Eliminado',
-                            icon: 'success'
-                        })
-                        delayNavigateOkUsers();
-                    }else{
-                        if (result.status === 403) {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'No cuenta con permisos para realizar dicha acción!',
-                                showConfirmButton: true,
-                            })
-                        }else {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Hubo un error al registrar la eliminición del producto, intente luego',
-                                showConfirmButton: true,
-                            })                
-                        }    
-                    }
-                });
-            };
-       }); 
-    };
 };

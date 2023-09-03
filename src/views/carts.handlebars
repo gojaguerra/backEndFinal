@@ -1,5 +1,5 @@
 <h2 style="color:darkblue;">Bienvenidos al servidor express - Comisión 39760</h2> <br>
-<h2>Carrito</h2>
+<h4>Carrito Total: ${{this.sumaTotal}}</h4>
 
 {{#if isValid}}
     <div class="table-responsive tabla">
@@ -26,7 +26,7 @@
                         <th scope="row"> {{this.product.price}}</th>
                         <th scope="row"> {{this.quantity}}</th>
                         <th scope="row"> <img src="{{this.product.thumbnail}}" alt="products" width="200" height="100"></th>
-                        <th class="btn btn-primary" id="{{this.product._id}}" onclick="cartDeleteItem(this.product)"><button>Eliminar</button></th>
+                        <td id="{{this.product._id}}" onclick="cartDeleteItem(this)"><button>Eliminar</button></td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -36,8 +36,10 @@
     <h2 style="color: chocolate;">No se encontraron productos en su carrito! </h2>
 {{/if}}
 <br/>
-<button id="viewProduct" class="btn btn-secondary"> Comprar Productos</button>
 <button id="goHome" class="btn btn-secondary"> Ir al Home</button>
+<button id="viewProduct" class="btn btn-secondary"> Comprar Productos</button>
+<button id="deleteCart" class="btn btn-secondary"> Vaciar Carrito</button>
 <button id="cerrarTicket" class="btn btn-primary"> Finalizar Pedido</button>
 
-<script src="/js/index.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/cart.js"></script>
