@@ -45,7 +45,6 @@ function procesDelId(comp){
                                 icon: 'success'
                             })
                             delayNavigateOk();
-                            /* window.location= "/realTimeProducts"; */
                         }else{
                             if (result.status === 403) {
                                 Swal.fire({

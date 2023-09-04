@@ -70,7 +70,6 @@ describe('Testing de carts', () => {
         expect(statusCode).to.be.eql(200);
         expect(_body).to.have.property('status');
         expect(_body).to.have.property('payload');
-        /* expect(_body.payload.acnowledged).to.be.eql(true); */
 
     });
 
@@ -79,7 +78,6 @@ describe('Testing de carts', () => {
 
         expect(statusCode).to.be.eql(200);
         expect(_body).to.have.property('payload');
-        /* expect(_body.payload).to.be.eql(result); */
 
     });
 

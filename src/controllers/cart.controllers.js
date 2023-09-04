@@ -199,7 +199,6 @@ const deleteProductInCart = async(req, res) => {
 const postPurchase = async(req, res) => {
     //Leo el ID del carrito y producto por parametros 
     const cartId = String(req.params.cid);
-    /* const userMail = "gojaguerra@gmail.com"; */
     const userMail = req.user.email;
     //  Valido que exista el carrito 
     try {
@@ -232,7 +231,6 @@ const postPurchase = async(req, res) => {
         // SI HAY PRODUCTOS VALIDADOS CON STOCK GENERO LA VENTA
         if (newCart.length > 0){
             const result = await postPurchaseService(newCart, userMail);
-            /* res.render("ticket.handlebars", newCart ); */
             if (noCart.length > 0) {
                 req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}  y no pudieron procesarse por falta de stock ${JSON.stringify(noStockCart, null)}`);
                 /* res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code} y no pudieron procesarse por falta de stock ${noCart}`  }) */

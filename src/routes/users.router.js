@@ -13,8 +13,6 @@ router.delete('/deleteall', deleteAllUser);
 // Cambio de ROL - middleware para verificar si corresponde o no
 router.post('/premium/:uid', verifyUserStatus, changeRol);
 
-/* router.post('/:uid/documents', uploader.array('file'), uploadFile); */
-
 // Subir los documentos: ACCOUNT ADDRESS IDENTIFICATION
 router.post('/:uid/documents', uploader.fields([
         {name: 'profiles', maxCount: 1}, 
@@ -23,6 +21,5 @@ router.post('/:uid/documents', uploader.fields([
 
 // Obtener usuarios para poder cambiarles el ROLE
 router.get('/usersrole', passportCall('jwt'), authorization('admin'), getAllUser);
-/* router.get('/usersrole', getAllUser); */
 
 export default router;

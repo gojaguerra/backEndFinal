@@ -49,7 +49,6 @@ if(addProduct) {
 const goHome = document.getElementById('goHome')
 if(goHome) {
     goHome.addEventListener('click', (event) => {
-        /* window.location= "/home"; */
         window.location= "/";
     });
 };
@@ -207,7 +206,6 @@ function userChangeRoleId(comp){
                             icon: 'success'
                         })
                         delayNavigateOkUsers();
-                        /* window.location= "/api/users/usersrole"; */
                     }else{
                         if (result.status === 403) {
                             Swal.fire({

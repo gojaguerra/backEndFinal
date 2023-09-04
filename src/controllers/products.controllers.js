@@ -87,7 +87,6 @@ const postProduct = async(req, res) => {
 
         const response = { status: "Success", payload: result};
 
-        /* res.send({ status: 'success', message: 'Product OK' }) */
         res.send( response )
 
     } catch (error) {
@@ -171,7 +170,6 @@ const deleteProductById = async(req,res)=>{
             io.emit("showProducts", await getProductsService());
             req.logger.info(`deleteProductById = El producto con ID ${id} fue eliminado!`);
             const response = { status: "Success", payload: `El producto con ID ${id} fue eliminado!`}; 
-            /* res.status(200).json(response); */
             res.send( response );
         } else {
             req.logger.error(`Error deleteProductById: NO existe el producto que desea eliminar!`);
@@ -181,7 +179,6 @@ const deleteProductById = async(req,res)=>{
     } catch (error) {
         req.logger.error(`Error deleteProductById: NO existe el producto que desea eliminar!`);
         res.status(404).json({ status: "NOT FOUND", payload: `NO existe el producto que desea eliminar!` });
-        /* res.status(500).send({ status: "error", error }); */
     };
 };
 

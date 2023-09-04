@@ -74,9 +74,8 @@ const loginUser = async (req, res) => {
             cartId: user.cart._id
         }
         
-        // role ADMIN
+        // role ADMIN - LO DEJE PARA ACORDARME la contraseña del admin
         /* if(email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
-            console.log(req.user.role);
         } */
         if(req.user.email === 'adminCoder@coder.com' ) {
             req.user.role = "admin";
@@ -356,7 +355,6 @@ const deleteUser = async (req, res) => {
 const deleteAllUser = async (req, res) => {
     try {
         const day = 1;
-        /* const condition = moment().subtract(day, 'days'); */
         const condition = moment().subtract(30, 'minutes');
 
         // no quiero borrar estos IDS

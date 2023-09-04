@@ -6,7 +6,6 @@ const getTicketsById = async(req, res) => {
     try {
         const ticket = await getTicketsByIdService(ticketId);
         const response ={ status: "Success", payload: ticket };
-        console.log(ticket);
         // VISTA DEL CARRITO
         // res.status(200).json(response);
         res.render("ticket.handlebars", ticket );

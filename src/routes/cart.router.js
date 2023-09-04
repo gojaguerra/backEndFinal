@@ -14,7 +14,6 @@ router.get('/:cid', getCartById);
 router.put('/:cid', passportCall('jwt'), authorization('user'), putCartById);
 
 // AGREGO/ACTUALIZO PRODUCTO EN EL CARRITO
-/* router.put('/:cid/product/:pid', passportCall('jwt'), authorization('user'), putProductInCart); */
 router.put('/:cid/product/:pid', passportCall('jwt'), authorizationRole(['user','premium']), putProductInCart);
 
 // BORRA TODOS LOS PRODUCTOS DEL CARRO

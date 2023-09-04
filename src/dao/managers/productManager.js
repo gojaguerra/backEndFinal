@@ -42,7 +42,7 @@ export default class productManager {
             console.log("ERROR:",error);
         }
     }
-    /* title, description, code, price, status, stock, category, thumbnail */
+    
     addProduct = async (product) => {
         try {
             // Traigo los productos
@@ -84,7 +84,6 @@ export default class productManager {
             
             // Valido que exista     
             if (codeIndex === -1) {
-                /* console.log(`El producto con ID ${id} NO existe!`); */
                 return codeIndex;
             }
             

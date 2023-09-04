@@ -10,6 +10,15 @@ function navigateCart() {
     window.location.reload();
 };
 
+function delayNavigateOk() {
+    if (!nIntervId) {
+        nIntervId = setInterval(navigateOk, 2000);
+    };
+};
+
+function navigateOk() {
+    window.location.replace('/');
+};
 
 // Botón para ir al HOME
 const goHome = document.getElementById('goHome')
@@ -59,9 +68,7 @@ function cartDeleteItem(comp){
                             title: 'Producto Eliminado',
                             icon: 'success'
                         })
-                        /* const url='/api/carts/'+cartId */
                         delayNavigateCart();
-                        /* window.location.replace(url); */
                     }else{
                         if (result.status === 403) {
                             Swal.fire({
@@ -120,24 +127,12 @@ if(closeCart) {
                         'Content-Type': 'application/json'
                     }
                 })
-                /* .then((response) =>
-                    response.json()
-                ) */
                 .then((result) => {
-                    /* ticketId=resul.ticketId;
-                    console.log("tickect"ticketId); */
                     if (result.status === 200) {
                         Swal.fire({
                             title: 'Carrito Cerrado',
                             icon: 'success'
                         })
-
-                        /* console.log("result:",result.payload); */
-
-                        /* const url='/api/carts/'+cartId */
-                        // delayNavigateCart();
-                        /* window.location.replace(url); */
-
                         Swal.fire({
                             title: '<strong>Pedido generado!</strong>',
                             icon: 'info',
@@ -154,10 +149,8 @@ if(closeCart) {
                             cancelButtonText:
                               '<i class="fa fa-thumbs-down"></i>'
                           }).then(()=>{
-                            delayNavigateCart();
+                            window.location.replace("/");
                           })
-
-
                     }else{
                         if (result.status === 403) {
                             Swal.fire({
@@ -215,9 +208,7 @@ if(deleteCart) {
                             title: 'Carrito Eliminado!',
                             icon: 'success'
                         })
-                        /* const url='/api/carts/'+cartId */
                         delayNavigateCart();
-                        /* window.location.replace(url); */
                     }else{
                         if (result.status === 403) {
                             Swal.fire({

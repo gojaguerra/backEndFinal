@@ -41,7 +41,6 @@ form.addEventListener('submit', e => {
                 title: 'El registro fue exitoso, ya puede ingresar su login!',
                 showConfirmButton: true,
             })
-            //window.location.replace('/');
             delayNavigateOk();
         }else{
             if (result.status === 400) {

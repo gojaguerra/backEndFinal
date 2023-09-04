@@ -64,3 +64,7 @@
 {"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
 {"level":"error","message":"getTicketById = El ticket con ID 64f4df4aa958f2a3d20381e9 NO existe!"}
 {"level":"error","message":"postPurchase = config is not defined"}
+{"level":"error","message":"postProduct = Faltan completar campos!"}
+{"level":"error","message":"postProduct = Faltan completar campos!"}
+{"level":"error","message":"postProduct = Faltan completar campos!"}
+{"level":"error","message":"postProduct = Faltan completar campos!"}
