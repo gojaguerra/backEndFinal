@@ -68,3 +68,8 @@
 {"level":"error","message":"postProduct = Faltan completar campos!"}
 {"level":"error","message":"postProduct = Faltan completar campos!"}
 {"level":"error","message":"postProduct = Faltan completar campos!"}
+{"level":"error","message":"postPurchase = noStockCart is not defined"}
+{"level":"error","message":"postPurchase = noStockCart is not defined"}
+{"level":"error","message":"postPurchase = noStockCart is not defined"}
+{"level":"error","message":"postPurchase = noStockCart is not defined"}
+{"level":"error","message":"postPurchase = noStockCart is not defined"}

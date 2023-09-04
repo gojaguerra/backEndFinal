@@ -139,7 +139,7 @@ if(closeCart) {
                             html:
                               'Su pedido a sido generado con exito, ' +
                               'y se han enviado instrucciones por email.<br>' +
-                              'Seguimiento en <a href="https://www.andreani.com/#!/personas" target="_blank">LINK</a> ',
+                              'Seguimiento <a href="https://www.andreani.com/#!/personas" target="_blank">AQUI</a> ',
                             showCloseButton: true,
                             showCancelButton: false,
                             focusConfirm: false,
@@ -152,20 +152,56 @@ if(closeCart) {
                             window.location.replace("/");
                           })
                     }else{
-                        if (result.status === 403) {
+                        if (result.status === 201) {
+
                             Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'No cuenta con permisos para realizar dicha acción!',
-                                showConfirmButton: true,
+                                title: 'Carrito Cerrado',
+                                icon: 'success'
                             })
+                            Swal.fire({
+                                title: '<strong>Pedido generado!</strong>',
+                                icon: 'info',
+                                html:
+                                  'Su pedido a sido generado con exito, ' +
+                                  'pero <b>hay items que se excluyeron por falta de stock.</b> ' +
+                                  'Se han enviado instrucciones por email.<br>' +
+                                  'Seguimiento <a href="https://www.andreani.com/#!/personas" target="_blank">AQUI</a> ',
+                                showCloseButton: true,
+                                showCancelButton: false,
+                                focusConfirm: false,
+                                confirmButtonText:
+                                  '<i class="fa fa-thumbs-up"></i> Gracias!',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                cancelButtonText:
+                                  '<i class="fa fa-thumbs-down"></i>'
+                              }).then(()=>{
+                                window.location.replace("/");
+                              })
                         }else{
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Hubo un error al registrar la finalizacion del carrito, intente luego',
-                                showConfirmButton: true,
-                            })
+                            if (result.status === 405){
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Hubo un error al registrar el pedido por falta de stock, intente luego',
+                                    showConfirmButton: true,
+                                })
+                            }else{
+                                if (result.status === 403) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'No cuenta con permisos para realizar dicha acción!',
+                                        showConfirmButton: true,
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'Hubo un error al registrar la finalizacion del carrito, intente luego',
+                                        showConfirmButton: true,
+                                    })
+                                }
+                            }
                         }
                     }
                 });

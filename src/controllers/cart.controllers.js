@@ -232,9 +232,9 @@ const postPurchase = async(req, res) => {
         if (newCart.length > 0){
             const result = await postPurchaseService(newCart, userMail);
             if (noCart.length > 0) {
-                req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}  y no pudieron procesarse por falta de stock ${JSON.stringify(noStockCart, null)}`);
+                req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}  y no pudieron procesarse por falta de stock ${JSON.stringify(noCart, null)}`);
                 /* res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code} y no pudieron procesarse por falta de stock ${noCart}`  }) */
-                res.status(200).send({status:200, ticketId: `${result._id}`})
+                res.status(201).send({status:201, ticketId: `${result._id}`})
             } else {
                 req.logger.info(`postPurchase = Se genero correctamente la compra con el ID ${result.code}`);
                 /* res.status(200).send({ status: 'success', payload: `Se genero correctamente la compra con el ID ${result.code}` }) */
@@ -242,8 +242,8 @@ const postPurchase = async(req, res) => {
             };
         } else {
             if (noCart.length > 0) {
-                req.logger.info(`postPurchase = No pudieron procesarse por falta de stock ${JSON.stringify(noStockCart, null)}`);
-                res.status(404).send({ status: "NOT FOUND", payload: `No pudieron procesarse por falta de stock ${JSON.stringify(noCart)}` });
+                req.logger.info(`postPurchase = No pudieron procesarse por falta de stock ${JSON.stringify(noCart, null)}`);
+                res.status(405).send({ status: "NOT FOUND", payload: `No pudieron procesarse por falta de stock ${JSON.stringify(noCart)}` });
             } else {
                 req.logger.info(`postPurchase = No hay productos en el carrito!`);
                 res.status(404).send({ status: "NOT FOUND", payload: `No hay productos en el carrito!` });
